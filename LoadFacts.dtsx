@@ -1,0 +1,3034 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="6/9/2022 12:09:32 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="DESKTOP-7OLPVDO"
+  DTS:CreatorName="DESKTOP-7OLPVDO\marys"
+  DTS:DTSID="{285DCF9F-F027-4BAB-9426-D4372DC1867F}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.2000.180"
+  DTS:LocaleID="1045"
+  DTS:ObjectName="Package1"
+  DTS:PackageType="5"
+  DTS:VersionBuild="8"
+  DTS:VersionGUID="{E21FF9CC-67DF-499A-81E8-0C74C6881A69}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[localhost.IMDB]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{A8DBBF59-9C84-43BC-9CE7-CB73D2952F9E}"
+      DTS:ObjectName="localhost.IMDB">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=localhost;Initial Catalog=IMDB;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[localhost.IMDB_dwh]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{1E697280-59F9-4721-BA71-EF3E859BD30E}"
+      DTS:ObjectName="localhost.IMDB_dwh">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=localhost;Initial Catalog=IMDB_dwh;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Load CommitmentFacts"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{2442d3fd-dc40-4f4d-8bde-3457a9b23d5f}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Load CommitmentFacts"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Load CommitmentFacts\OLE DB Destination"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="OLE DB Destination"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[CommitmentFacts]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1250</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load CommitmentFacts\OLE DB Destination.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[localhost.IMDB_dwh]"
+                  connectionManagerRefId="Package.ConnectionManagers[localhost.IMDB_dwh]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Load CommitmentFacts\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load CommitmentFacts\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[titleID]"
+                      cachedDataType="i4"
+                      cachedName="titleID"
+                      externalMetadataColumnId="Package\Load CommitmentFacts\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[titleID]"
+                      lineageId="Package\Load CommitmentFacts\OLE DB Source.Outputs[OLE DB Source Output].Columns[titleID]" />
+                    <inputColumn
+                      refId="Package\Load CommitmentFacts\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[salary]"
+                      cachedDataType="cy"
+                      cachedName="salary"
+                      externalMetadataColumnId="Package\Load CommitmentFacts\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[salary]"
+                      lineageId="Package\Load CommitmentFacts\OLE DB Source.Outputs[OLE DB Source Output].Columns[salary]" />
+                    <inputColumn
+                      refId="Package\Load CommitmentFacts\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[loadDate]"
+                      cachedDataType="dbDate"
+                      cachedName="loadDate"
+                      externalMetadataColumnId="Package\Load CommitmentFacts\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LoadDate]"
+                      lineageId="Package\Load CommitmentFacts\OLE DB Source.Outputs[OLE DB Source Output].Columns[loadDate]" />
+                    <inputColumn
+                      refId="Package\Load CommitmentFacts\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[personSKID]"
+                      cachedDataType="i4"
+                      cachedName="personSKID"
+                      externalMetadataColumnId="Package\Load CommitmentFacts\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[personSKID]"
+                      lineageId="Package\Load CommitmentFacts\OLE DB Source.Outputs[OLE DB Source Output].Columns[personSKID]" />
+                    <inputColumn
+                      refId="Package\Load CommitmentFacts\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[commitmentType]"
+                      cachedDataType="wstr"
+                      cachedLength="10"
+                      cachedName="commitmentType"
+                      externalMetadataColumnId="Package\Load CommitmentFacts\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[commitmentType]"
+                      lineageId="Package\Load CommitmentFacts\OLE DB Source.Outputs[OLE DB Source Output].Columns[commitmentType]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Load CommitmentFacts\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[titleID]"
+                      dataType="i4"
+                      name="titleID" />
+                    <externalMetadataColumn
+                      refId="Package\Load CommitmentFacts\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[commitmentType]"
+                      dataType="wstr"
+                      length="10"
+                      name="commitmentType" />
+                    <externalMetadataColumn
+                      refId="Package\Load CommitmentFacts\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[salary]"
+                      dataType="cy"
+                      name="salary" />
+                    <externalMetadataColumn
+                      refId="Package\Load CommitmentFacts\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[personSKID]"
+                      dataType="i4"
+                      name="personSKID" />
+                    <externalMetadataColumn
+                      refId="Package\Load CommitmentFacts\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LoadDate]"
+                      dataType="dbDate"
+                      name="LoadDate" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load CommitmentFacts\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Load CommitmentFacts\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load CommitmentFacts\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load CommitmentFacts\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load CommitmentFacts\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load CommitmentFacts\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load CommitmentFacts\OLE DB Source"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="OLE DB Source"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT *, CAST(GETDATE() AS DATE) AS loadDate FROM CommitmentFactsStaging</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1250</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load CommitmentFacts\OLE DB Source.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[localhost.IMDB_dwh]"
+                  connectionManagerRefId="Package.ConnectionManagers[localhost.IMDB_dwh]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Load CommitmentFacts\OLE DB Source.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load CommitmentFacts\OLE DB Source.Outputs[OLE DB Source Output].Columns[personSKID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load CommitmentFacts\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[personSKID]"
+                      lineageId="Package\Load CommitmentFacts\OLE DB Source.Outputs[OLE DB Source Output].Columns[personSKID]"
+                      name="personSKID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load CommitmentFacts\OLE DB Source.Outputs[OLE DB Source Output].Columns[titleID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load CommitmentFacts\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[titleID]"
+                      lineageId="Package\Load CommitmentFacts\OLE DB Source.Outputs[OLE DB Source Output].Columns[titleID]"
+                      name="titleID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load CommitmentFacts\OLE DB Source.Outputs[OLE DB Source Output].Columns[commitmentType]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load CommitmentFacts\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[commitmentType]"
+                      length="10"
+                      lineageId="Package\Load CommitmentFacts\OLE DB Source.Outputs[OLE DB Source Output].Columns[commitmentType]"
+                      name="commitmentType"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load CommitmentFacts\OLE DB Source.Outputs[OLE DB Source Output].Columns[salary]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load CommitmentFacts\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[salary]"
+                      lineageId="Package\Load CommitmentFacts\OLE DB Source.Outputs[OLE DB Source Output].Columns[salary]"
+                      name="salary"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load CommitmentFacts\OLE DB Source.Outputs[OLE DB Source Output].Columns[loadDate]"
+                      dataType="dbDate"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load CommitmentFacts\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[loadDate]"
+                      lineageId="Package\Load CommitmentFacts\OLE DB Source.Outputs[OLE DB Source Output].Columns[loadDate]"
+                      name="loadDate"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Load CommitmentFacts\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[personSKID]"
+                      dataType="i4"
+                      name="personSKID" />
+                    <externalMetadataColumn
+                      refId="Package\Load CommitmentFacts\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[titleID]"
+                      dataType="i4"
+                      name="titleID" />
+                    <externalMetadataColumn
+                      refId="Package\Load CommitmentFacts\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[commitmentType]"
+                      dataType="wstr"
+                      length="10"
+                      name="commitmentType" />
+                    <externalMetadataColumn
+                      refId="Package\Load CommitmentFacts\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[salary]"
+                      dataType="cy"
+                      name="salary" />
+                    <externalMetadataColumn
+                      refId="Package\Load CommitmentFacts\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[loadDate]"
+                      dataType="dbDate"
+                      name="loadDate" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Load CommitmentFacts\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load CommitmentFacts\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[personSKID]"
+                      dataType="i4"
+                      lineageId="Package\Load CommitmentFacts\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[personSKID]"
+                      name="personSKID" />
+                    <outputColumn
+                      refId="Package\Load CommitmentFacts\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[titleID]"
+                      dataType="i4"
+                      lineageId="Package\Load CommitmentFacts\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[titleID]"
+                      name="titleID" />
+                    <outputColumn
+                      refId="Package\Load CommitmentFacts\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[commitmentType]"
+                      dataType="wstr"
+                      length="10"
+                      lineageId="Package\Load CommitmentFacts\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[commitmentType]"
+                      name="commitmentType" />
+                    <outputColumn
+                      refId="Package\Load CommitmentFacts\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[salary]"
+                      dataType="cy"
+                      lineageId="Package\Load CommitmentFacts\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[salary]"
+                      name="salary" />
+                    <outputColumn
+                      refId="Package\Load CommitmentFacts\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[loadDate]"
+                      dataType="dbDate"
+                      lineageId="Package\Load CommitmentFacts\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[loadDate]"
+                      name="loadDate" />
+                    <outputColumn
+                      refId="Package\Load CommitmentFacts\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load CommitmentFacts\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load CommitmentFacts\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load CommitmentFacts\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Load CommitmentFacts.Paths[OLE DB Source Output]"
+              endId="Package\Load CommitmentFacts\OLE DB Destination.Inputs[OLE DB Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\Load CommitmentFacts\OLE DB Source.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Load CommitmentFactsStaging"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{5ee48a46-7179-408f-ac91-785e6cb66356}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Load CommitmentFactsStaging"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Load CommitmentFactsStaging\Check if in MovieDimension"
+              componentClassID="Microsoft.Lookup"
+              contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
+              description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
+              name="Check if in MovieDimension"
+              usesDispositions="true"
+              version="6">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SQL statement that generates the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from [dbo].[MovieDimension]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies a SQL statement that uses parameters to generate the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommandParam"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (select * from [dbo].[MovieDimension]) [refTable]
+where [refTable].[titleID] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the type of connection used to access the reference dataset."
+                  name="ConnectionType"
+                  typeConverter="LookupConnectionType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the cache type of the lookup table."
+                  name="CacheType"
+                  typeConverter="CacheType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
+                  name="NoMatchBehavior"
+                  typeConverter="LookupNoMatchBehavior">1</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
+                  name="NoMatchCachePercentage">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Maximum Memory Usage for Reference Cache on a 32 bit platform."
+                  name="MaxMemoryUsage">25</property>
+                <property
+                  dataType="System.Int64"
+                  description="Maximum Memory Usage for Reference Cache on a 64 bit platform."
+                  name="MaxMemoryUsage64">25</property>
+                <property
+                  dataType="System.String"
+                  description="Indicates whether to reference metadata in an XML format."
+                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="titleID" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="titleName" dataType="DT_WSTR" length="450" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="titleType" dataType="DT_WSTR" length="12" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="isAdult" dataType="DT_WSTR" length="7" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="languageName" dataType="DT_WSTR" length="100" precision="0" scale="0" codePage="0"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                <property
+                  containsID="true"
+                  dataType="System.String"
+                  description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
+                  name="ParameterMap">#{Package\Load CommitmentFactsStaging\OLE DB Source.Outputs[OLE DB Source Output].Columns[titleID]};</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1250</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Determines whether duplicate keys in the reference data should be treated as errors when full cache mode is used."
+                  name="TreatDuplicateKeysAsError">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load CommitmentFactsStaging\Check if in MovieDimension.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[localhost.IMDB_dwh]"
+                  connectionManagerRefId="Package.ConnectionManagers[localhost.IMDB_dwh]"
+                  description="Connection manager used to access lookup data."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Load CommitmentFactsStaging\Check if in MovieDimension.Inputs[Lookup Input]"
+                  name="Lookup Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load CommitmentFactsStaging\Check if in MovieDimension.Inputs[Lookup Input].Columns[titleID]"
+                      cachedDataType="i4"
+                      cachedName="titleID"
+                      lineageId="Package\Load CommitmentFactsStaging\OLE DB Source.Outputs[OLE DB Source Output].Columns[titleID]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">titleID</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load CommitmentFactsStaging\Check if in MovieDimension.Outputs[Lookup Match Output]"
+                  errorOrTruncationOperation="Lookup"
+                  exclusionGroup="1"
+                  name="Lookup Match Output"
+                  synchronousInputId="Package\Load CommitmentFactsStaging\Check if in MovieDimension.Inputs[Lookup Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load CommitmentFactsStaging\Check if in MovieDimension.Outputs[Lookup No Match Output]"
+                  description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
+                  exclusionGroup="1"
+                  name="Lookup No Match Output"
+                  synchronousInputId="Package\Load CommitmentFactsStaging\Check if in MovieDimension.Inputs[Lookup Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load CommitmentFactsStaging\Check if in MovieDimension.Outputs[Lookup Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Lookup Error Output"
+                  synchronousInputId="Package\Load CommitmentFactsStaging\Check if in MovieDimension.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load CommitmentFactsStaging\Check if in MovieDimension.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load CommitmentFactsStaging\Check if in MovieDimension.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load CommitmentFactsStaging\Check if in MovieDimension.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load CommitmentFactsStaging\Check if in MovieDimension.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load CommitmentFactsStaging\Lookup personSKID"
+              componentClassID="Microsoft.Lookup"
+              contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
+              description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
+              name="Lookup personSKID"
+              usesDispositions="true"
+              version="6">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SQL statement that generates the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT * FROM PersonDimension
+WHERE isActive='Yes'</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies a SQL statement that uses parameters to generate the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommandParam"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (SELECT * FROM PersonDimension
+WHERE isActive='Yes') [refTable]
+where [refTable].[personID] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the type of connection used to access the reference dataset."
+                  name="ConnectionType"
+                  typeConverter="LookupConnectionType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the cache type of the lookup table."
+                  name="CacheType"
+                  typeConverter="CacheType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
+                  name="NoMatchBehavior"
+                  typeConverter="LookupNoMatchBehavior">1</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
+                  name="NoMatchCachePercentage">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Maximum Memory Usage for Reference Cache on a 32 bit platform."
+                  name="MaxMemoryUsage">25</property>
+                <property
+                  dataType="System.Int64"
+                  description="Maximum Memory Usage for Reference Cache on a 64 bit platform."
+                  name="MaxMemoryUsage64">25</property>
+                <property
+                  dataType="System.String"
+                  description="Indicates whether to reference metadata in an XML format."
+                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="personSKID" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="personID" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="fullName" dataType="DT_WSTR" length="110" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="birthYearID" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="isAlive" dataType="DT_WSTR" length="7" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="deathYearID" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="surname" dataType="DT_WSTR" length="110" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="name" dataType="DT_WSTR" length="110" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="isMarried" dataType="DT_WSTR" length="7" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="activeFrom" dataType="DT_DBDATE" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="activeTo" dataType="DT_DBDATE" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="isActive" dataType="DT_WSTR" length="3" precision="0" scale="0" codePage="0"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                <property
+                  containsID="true"
+                  dataType="System.String"
+                  description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
+                  name="ParameterMap">#{Package\Load CommitmentFactsStaging\OLE DB Source.Outputs[OLE DB Source Output].Columns[personID]};</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1250</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Determines whether duplicate keys in the reference data should be treated as errors when full cache mode is used."
+                  name="TreatDuplicateKeysAsError">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load CommitmentFactsStaging\Lookup personSKID.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[localhost.IMDB_dwh]"
+                  connectionManagerRefId="Package.ConnectionManagers[localhost.IMDB_dwh]"
+                  description="Connection manager used to access lookup data."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Load CommitmentFactsStaging\Lookup personSKID.Inputs[Lookup Input]"
+                  name="Lookup Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load CommitmentFactsStaging\Lookup personSKID.Inputs[Lookup Input].Columns[personID]"
+                      cachedDataType="i4"
+                      cachedName="personID"
+                      lineageId="Package\Load CommitmentFactsStaging\OLE DB Source.Outputs[OLE DB Source Output].Columns[personID]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">personID</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load CommitmentFactsStaging\Lookup personSKID.Outputs[Lookup Match Output]"
+                  errorOrTruncationOperation="Lookup"
+                  exclusionGroup="1"
+                  name="Lookup Match Output"
+                  synchronousInputId="Package\Load CommitmentFactsStaging\Lookup personSKID.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load CommitmentFactsStaging\Lookup personSKID.Outputs[Lookup Match Output].Columns[personSKID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Copy Column"
+                      lineageId="Package\Load CommitmentFactsStaging\Lookup personSKID.Outputs[Lookup Match Output].Columns[personSKID]"
+                      name="personSKID"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">personSKID</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load CommitmentFactsStaging\Lookup personSKID.Outputs[Lookup No Match Output]"
+                  description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
+                  exclusionGroup="1"
+                  name="Lookup No Match Output"
+                  synchronousInputId="Package\Load CommitmentFactsStaging\Lookup personSKID.Inputs[Lookup Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load CommitmentFactsStaging\Lookup personSKID.Outputs[Lookup Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Lookup Error Output"
+                  synchronousInputId="Package\Load CommitmentFactsStaging\Lookup personSKID.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load CommitmentFactsStaging\Lookup personSKID.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load CommitmentFactsStaging\Lookup personSKID.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load CommitmentFactsStaging\Lookup personSKID.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load CommitmentFactsStaging\Lookup personSKID.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load CommitmentFactsStaging\OLE DB Destination"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="OLE DB Destination"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[CommitmentFactsStaging]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1250</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load CommitmentFactsStaging\OLE DB Destination.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[localhost.IMDB_dwh]"
+                  connectionManagerRefId="Package.ConnectionManagers[localhost.IMDB_dwh]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Load CommitmentFactsStaging\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load CommitmentFactsStaging\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[titleID]"
+                      cachedDataType="i4"
+                      cachedName="titleID"
+                      externalMetadataColumnId="Package\Load CommitmentFactsStaging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[titleID]"
+                      lineageId="Package\Load CommitmentFactsStaging\OLE DB Source.Outputs[OLE DB Source Output].Columns[titleID]" />
+                    <inputColumn
+                      refId="Package\Load CommitmentFactsStaging\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[salary]"
+                      cachedDataType="cy"
+                      cachedName="salary"
+                      externalMetadataColumnId="Package\Load CommitmentFactsStaging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[salary]"
+                      lineageId="Package\Load CommitmentFactsStaging\OLE DB Source.Outputs[OLE DB Source Output].Columns[salary]" />
+                    <inputColumn
+                      refId="Package\Load CommitmentFactsStaging\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[roleType]"
+                      cachedDataType="wstr"
+                      cachedLength="10"
+                      cachedName="roleType"
+                      externalMetadataColumnId="Package\Load CommitmentFactsStaging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[commitmentType]"
+                      lineageId="Package\Load CommitmentFactsStaging\OLE DB Source.Outputs[OLE DB Source Output].Columns[roleType]" />
+                    <inputColumn
+                      refId="Package\Load CommitmentFactsStaging\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[personSKID]"
+                      cachedDataType="i4"
+                      cachedName="personSKID"
+                      externalMetadataColumnId="Package\Load CommitmentFactsStaging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[personSKID]"
+                      lineageId="Package\Load CommitmentFactsStaging\Lookup personSKID.Outputs[Lookup Match Output].Columns[personSKID]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Load CommitmentFactsStaging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[titleID]"
+                      dataType="i4"
+                      name="titleID" />
+                    <externalMetadataColumn
+                      refId="Package\Load CommitmentFactsStaging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[commitmentType]"
+                      dataType="wstr"
+                      length="10"
+                      name="commitmentType" />
+                    <externalMetadataColumn
+                      refId="Package\Load CommitmentFactsStaging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[salary]"
+                      dataType="cy"
+                      name="salary" />
+                    <externalMetadataColumn
+                      refId="Package\Load CommitmentFactsStaging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[personSKID]"
+                      dataType="i4"
+                      name="personSKID" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load CommitmentFactsStaging\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Load CommitmentFactsStaging\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load CommitmentFactsStaging\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load CommitmentFactsStaging\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load CommitmentFactsStaging\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load CommitmentFactsStaging\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load CommitmentFactsStaging\OLE DB Source"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="OLE DB Source"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[TitlesCrewMembers]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1250</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load CommitmentFactsStaging\OLE DB Source.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[localhost.IMDB]"
+                  connectionManagerRefId="Package.ConnectionManagers[localhost.IMDB]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Load CommitmentFactsStaging\OLE DB Source.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load CommitmentFactsStaging\OLE DB Source.Outputs[OLE DB Source Output].Columns[ID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load CommitmentFactsStaging\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ID]"
+                      lineageId="Package\Load CommitmentFactsStaging\OLE DB Source.Outputs[OLE DB Source Output].Columns[ID]"
+                      name="ID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load CommitmentFactsStaging\OLE DB Source.Outputs[OLE DB Source Output].Columns[titleID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load CommitmentFactsStaging\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[titleID]"
+                      lineageId="Package\Load CommitmentFactsStaging\OLE DB Source.Outputs[OLE DB Source Output].Columns[titleID]"
+                      name="titleID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load CommitmentFactsStaging\OLE DB Source.Outputs[OLE DB Source Output].Columns[personID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load CommitmentFactsStaging\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[personID]"
+                      lineageId="Package\Load CommitmentFactsStaging\OLE DB Source.Outputs[OLE DB Source Output].Columns[personID]"
+                      name="personID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load CommitmentFactsStaging\OLE DB Source.Outputs[OLE DB Source Output].Columns[roleType]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load CommitmentFactsStaging\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[roleType]"
+                      length="10"
+                      lineageId="Package\Load CommitmentFactsStaging\OLE DB Source.Outputs[OLE DB Source Output].Columns[roleType]"
+                      name="roleType"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load CommitmentFactsStaging\OLE DB Source.Outputs[OLE DB Source Output].Columns[salary]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load CommitmentFactsStaging\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[salary]"
+                      lineageId="Package\Load CommitmentFactsStaging\OLE DB Source.Outputs[OLE DB Source Output].Columns[salary]"
+                      name="salary"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Load CommitmentFactsStaging\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ID]"
+                      dataType="i4"
+                      name="ID" />
+                    <externalMetadataColumn
+                      refId="Package\Load CommitmentFactsStaging\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[titleID]"
+                      dataType="i4"
+                      name="titleID" />
+                    <externalMetadataColumn
+                      refId="Package\Load CommitmentFactsStaging\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[personID]"
+                      dataType="i4"
+                      name="personID" />
+                    <externalMetadataColumn
+                      refId="Package\Load CommitmentFactsStaging\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[roleType]"
+                      dataType="wstr"
+                      length="10"
+                      name="roleType" />
+                    <externalMetadataColumn
+                      refId="Package\Load CommitmentFactsStaging\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[salary]"
+                      dataType="cy"
+                      name="salary" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Load CommitmentFactsStaging\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load CommitmentFactsStaging\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ID]"
+                      dataType="i4"
+                      lineageId="Package\Load CommitmentFactsStaging\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ID]"
+                      name="ID" />
+                    <outputColumn
+                      refId="Package\Load CommitmentFactsStaging\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[titleID]"
+                      dataType="i4"
+                      lineageId="Package\Load CommitmentFactsStaging\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[titleID]"
+                      name="titleID" />
+                    <outputColumn
+                      refId="Package\Load CommitmentFactsStaging\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[personID]"
+                      dataType="i4"
+                      lineageId="Package\Load CommitmentFactsStaging\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[personID]"
+                      name="personID" />
+                    <outputColumn
+                      refId="Package\Load CommitmentFactsStaging\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[roleType]"
+                      dataType="wstr"
+                      length="10"
+                      lineageId="Package\Load CommitmentFactsStaging\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[roleType]"
+                      name="roleType" />
+                    <outputColumn
+                      refId="Package\Load CommitmentFactsStaging\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[salary]"
+                      dataType="cy"
+                      lineageId="Package\Load CommitmentFactsStaging\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[salary]"
+                      name="salary" />
+                    <outputColumn
+                      refId="Package\Load CommitmentFactsStaging\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load CommitmentFactsStaging\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load CommitmentFactsStaging\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load CommitmentFactsStaging\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Load CommitmentFactsStaging.Paths[Lookup Match Output]"
+              endId="Package\Load CommitmentFactsStaging\Lookup personSKID.Inputs[Lookup Input]"
+              name="Lookup Match Output"
+              startId="Package\Load CommitmentFactsStaging\Check if in MovieDimension.Outputs[Lookup Match Output]" />
+            <path
+              refId="Package\Load CommitmentFactsStaging.Paths[Lookup Match Output1]"
+              endId="Package\Load CommitmentFactsStaging\OLE DB Destination.Inputs[OLE DB Destination Input]"
+              name="Lookup Match Output"
+              startId="Package\Load CommitmentFactsStaging\Lookup personSKID.Outputs[Lookup Match Output]" />
+            <path
+              refId="Package\Load CommitmentFactsStaging.Paths[OLE DB Source Output]"
+              endId="Package\Load CommitmentFactsStaging\Check if in MovieDimension.Inputs[Lookup Input]"
+              name="OLE DB Source Output"
+              startId="Package\Load CommitmentFactsStaging\OLE DB Source.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Load MovieStatisticsFacts"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{767e86d4-5348-4cba-987c-8544c49d6244}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Load MovieStatisticsFacts"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Load MovieStatisticsFacts\Derived Column"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="Derived Column"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Load MovieStatisticsFacts\Derived Column.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load MovieStatisticsFacts\Derived Column.Inputs[Derived Column Input].Columns[regionCode]"
+                      cachedDataType="wstr"
+                      cachedLength="4"
+                      cachedName="regionCode"
+                      lineageId="Package\Load MovieStatisticsFacts\MoviesView.Outputs[OLE DB Source Output].Columns[regionCode]" />
+                    <inputColumn
+                      refId="Package\Load MovieStatisticsFacts\Derived Column.Inputs[Derived Column Input].Columns[genre]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="genre"
+                      lineageId="Package\Load MovieStatisticsFacts\MoviesView.Outputs[OLE DB Source Output].Columns[genre]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load MovieStatisticsFacts\Derived Column.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\Load MovieStatisticsFacts\Derived Column.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load MovieStatisticsFacts\Derived Column.Outputs[Derived Column Output].Columns[regionCodeCorrected]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="7"
+                      lineageId="Package\Load MovieStatisticsFacts\Derived Column.Outputs[Derived Column Output].Columns[regionCodeCorrected]"
+                      name="regionCodeCorrected"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">(DT_WSTR,7)([ISNULL](#{Package\Load MovieStatisticsFacts\MoviesView.Outputs[OLE DB Source Output].Columns[regionCode]}) ? "Unknown" : [LEN](#{Package\Load MovieStatisticsFacts\MoviesView.Outputs[OLE DB Source Output].Columns[regionCode]}) != 2 ? "Unknown" : #{Package\Load MovieStatisticsFacts\MoviesView.Outputs[OLE DB Source Output].Columns[regionCode]})</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">(DT_WSTR,7)(ISNULL(regionCode) ? "Unknown" : LEN(regionCode) != 2 ? "Unknown" : regionCode)</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Load MovieStatisticsFacts\Derived Column.Outputs[Derived Column Output].Columns[genreName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="50"
+                      lineageId="Package\Load MovieStatisticsFacts\Derived Column.Outputs[Derived Column Output].Columns[genreName]"
+                      name="genreName"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">(DT_WSTR,50)([ISNULL](#{Package\Load MovieStatisticsFacts\MoviesView.Outputs[OLE DB Source Output].Columns[genre]}) ? "Unknown" : #{Package\Load MovieStatisticsFacts\MoviesView.Outputs[OLE DB Source Output].Columns[genre]})</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">(DT_WSTR,50)(ISNULL(genre) ? "Unknown" : genre)</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load MovieStatisticsFacts\Derived Column.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\Load MovieStatisticsFacts\Derived Column.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load MovieStatisticsFacts\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load MovieStatisticsFacts\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load MovieStatisticsFacts\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load MovieStatisticsFacts\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load MovieStatisticsFacts\Lookup addedDate"
+              componentClassID="Microsoft.Lookup"
+              contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
+              description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
+              name="Lookup addedDate"
+              usesDispositions="true"
+              version="6">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SQL statement that generates the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT DateID, Date FROM DateDimension</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies a SQL statement that uses parameters to generate the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommandParam"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (SELECT DateID, Date FROM DateDimension) [refTable]
+where [refTable].[Date] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the type of connection used to access the reference dataset."
+                  name="ConnectionType"
+                  typeConverter="LookupConnectionType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the cache type of the lookup table."
+                  name="CacheType"
+                  typeConverter="CacheType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
+                  name="NoMatchBehavior"
+                  typeConverter="LookupNoMatchBehavior">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
+                  name="NoMatchCachePercentage">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Maximum Memory Usage for Reference Cache on a 32 bit platform."
+                  name="MaxMemoryUsage">25</property>
+                <property
+                  dataType="System.Int64"
+                  description="Maximum Memory Usage for Reference Cache on a 64 bit platform."
+                  name="MaxMemoryUsage64">25</property>
+                <property
+                  dataType="System.String"
+                  description="Indicates whether to reference metadata in an XML format."
+                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="DateID" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Date" dataType="DT_DBDATE" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                <property
+                  containsID="true"
+                  dataType="System.String"
+                  description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
+                  name="ParameterMap">#{Package\Load MovieStatisticsFacts\MoviesView.Outputs[OLE DB Source Output].Columns[addedDate]};</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1250</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Determines whether duplicate keys in the reference data should be treated as errors when full cache mode is used."
+                  name="TreatDuplicateKeysAsError">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load MovieStatisticsFacts\Lookup addedDate.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[localhost.IMDB_dwh]"
+                  connectionManagerRefId="Package.ConnectionManagers[localhost.IMDB_dwh]"
+                  description="Connection manager used to access lookup data."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Load MovieStatisticsFacts\Lookup addedDate.Inputs[Lookup Input]"
+                  name="Lookup Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load MovieStatisticsFacts\Lookup addedDate.Inputs[Lookup Input].Columns[addedDate]"
+                      cachedDataType="dbDate"
+                      cachedName="addedDate"
+                      lineageId="Package\Load MovieStatisticsFacts\MoviesView.Outputs[OLE DB Source Output].Columns[addedDate]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">Date</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load MovieStatisticsFacts\Lookup addedDate.Outputs[Lookup Match Output]"
+                  errorOrTruncationOperation="Lookup"
+                  errorRowDisposition="FailComponent"
+                  exclusionGroup="1"
+                  name="Lookup Match Output"
+                  synchronousInputId="Package\Load MovieStatisticsFacts\Lookup addedDate.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load MovieStatisticsFacts\Lookup addedDate.Outputs[Lookup Match Output].Columns[addedDateID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Copy Column"
+                      lineageId="Package\Load MovieStatisticsFacts\Lookup addedDate.Outputs[Lookup Match Output].Columns[addedDateID]"
+                      name="addedDateID"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">DateID</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load MovieStatisticsFacts\Lookup addedDate.Outputs[Lookup No Match Output]"
+                  description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
+                  exclusionGroup="1"
+                  name="Lookup No Match Output"
+                  synchronousInputId="Package\Load MovieStatisticsFacts\Lookup addedDate.Inputs[Lookup Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load MovieStatisticsFacts\Lookup addedDate.Outputs[Lookup Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Lookup Error Output"
+                  synchronousInputId="Package\Load MovieStatisticsFacts\Lookup addedDate.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load MovieStatisticsFacts\Lookup addedDate.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load MovieStatisticsFacts\Lookup addedDate.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load MovieStatisticsFacts\Lookup addedDate.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load MovieStatisticsFacts\Lookup addedDate.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load MovieStatisticsFacts\Lookup genre"
+              componentClassID="Microsoft.Lookup"
+              contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
+              description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
+              name="Lookup genre"
+              usesDispositions="true"
+              version="6">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SQL statement that generates the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from [dbo].[GenreDimension]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies a SQL statement that uses parameters to generate the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommandParam"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (select * from [dbo].[GenreDimension]) [refTable]
+where [refTable].[genreName] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the type of connection used to access the reference dataset."
+                  name="ConnectionType"
+                  typeConverter="LookupConnectionType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the cache type of the lookup table."
+                  name="CacheType"
+                  typeConverter="CacheType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
+                  name="NoMatchBehavior"
+                  typeConverter="LookupNoMatchBehavior">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
+                  name="NoMatchCachePercentage">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Maximum Memory Usage for Reference Cache on a 32 bit platform."
+                  name="MaxMemoryUsage">25</property>
+                <property
+                  dataType="System.Int64"
+                  description="Maximum Memory Usage for Reference Cache on a 64 bit platform."
+                  name="MaxMemoryUsage64">25</property>
+                <property
+                  dataType="System.String"
+                  description="Indicates whether to reference metadata in an XML format."
+                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="genreID" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="genreName" dataType="DT_WSTR" length="50" precision="0" scale="0" codePage="0"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                <property
+                  containsID="true"
+                  dataType="System.String"
+                  description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
+                  name="ParameterMap">#{Package\Load MovieStatisticsFacts\Derived Column.Outputs[Derived Column Output].Columns[genreName]};</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1250</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Determines whether duplicate keys in the reference data should be treated as errors when full cache mode is used."
+                  name="TreatDuplicateKeysAsError">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load MovieStatisticsFacts\Lookup genre.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[localhost.IMDB_dwh]"
+                  connectionManagerRefId="Package.ConnectionManagers[localhost.IMDB_dwh]"
+                  description="Connection manager used to access lookup data."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Load MovieStatisticsFacts\Lookup genre.Inputs[Lookup Input]"
+                  name="Lookup Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load MovieStatisticsFacts\Lookup genre.Inputs[Lookup Input].Columns[genreName]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="genreName"
+                      lineageId="Package\Load MovieStatisticsFacts\Derived Column.Outputs[Derived Column Output].Columns[genreName]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">genreName</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load MovieStatisticsFacts\Lookup genre.Outputs[Lookup Match Output]"
+                  errorOrTruncationOperation="Lookup"
+                  errorRowDisposition="FailComponent"
+                  exclusionGroup="1"
+                  name="Lookup Match Output"
+                  synchronousInputId="Package\Load MovieStatisticsFacts\Lookup genre.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load MovieStatisticsFacts\Lookup genre.Outputs[Lookup Match Output].Columns[primaryGenreID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Copy Column"
+                      lineageId="Package\Load MovieStatisticsFacts\Lookup genre.Outputs[Lookup Match Output].Columns[primaryGenreID]"
+                      name="primaryGenreID"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">genreID</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load MovieStatisticsFacts\Lookup genre.Outputs[Lookup No Match Output]"
+                  description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
+                  exclusionGroup="1"
+                  name="Lookup No Match Output"
+                  synchronousInputId="Package\Load MovieStatisticsFacts\Lookup genre.Inputs[Lookup Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load MovieStatisticsFacts\Lookup genre.Outputs[Lookup Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Lookup Error Output"
+                  synchronousInputId="Package\Load MovieStatisticsFacts\Lookup genre.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load MovieStatisticsFacts\Lookup genre.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load MovieStatisticsFacts\Lookup genre.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load MovieStatisticsFacts\Lookup genre.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load MovieStatisticsFacts\Lookup genre.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load MovieStatisticsFacts\Lookup geography"
+              componentClassID="Microsoft.Lookup"
+              contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
+              description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
+              name="Lookup geography"
+              usesDispositions="true"
+              version="6">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SQL statement that generates the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT countryCode, geographyID FROM GeographyDimension</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies a SQL statement that uses parameters to generate the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommandParam"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (SELECT countryCode, geographyID FROM GeographyDimension) [refTable]
+where [refTable].[countryCode] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the type of connection used to access the reference dataset."
+                  name="ConnectionType"
+                  typeConverter="LookupConnectionType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the cache type of the lookup table."
+                  name="CacheType"
+                  typeConverter="CacheType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
+                  name="NoMatchBehavior"
+                  typeConverter="LookupNoMatchBehavior">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
+                  name="NoMatchCachePercentage">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Maximum Memory Usage for Reference Cache on a 32 bit platform."
+                  name="MaxMemoryUsage">25</property>
+                <property
+                  dataType="System.Int64"
+                  description="Maximum Memory Usage for Reference Cache on a 64 bit platform."
+                  name="MaxMemoryUsage64">25</property>
+                <property
+                  dataType="System.String"
+                  description="Indicates whether to reference metadata in an XML format."
+                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="countryCode" dataType="DT_WSTR" length="50" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="geographyID" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                <property
+                  containsID="true"
+                  dataType="System.String"
+                  description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
+                  name="ParameterMap">#{Package\Load MovieStatisticsFacts\Derived Column.Outputs[Derived Column Output].Columns[regionCodeCorrected]};</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1250</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Determines whether duplicate keys in the reference data should be treated as errors when full cache mode is used."
+                  name="TreatDuplicateKeysAsError">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load MovieStatisticsFacts\Lookup geography.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[localhost.IMDB_dwh]"
+                  connectionManagerRefId="Package.ConnectionManagers[localhost.IMDB_dwh]"
+                  description="Connection manager used to access lookup data."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Load MovieStatisticsFacts\Lookup geography.Inputs[Lookup Input]"
+                  name="Lookup Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load MovieStatisticsFacts\Lookup geography.Inputs[Lookup Input].Columns[regionCodeCorrected]"
+                      cachedDataType="wstr"
+                      cachedLength="7"
+                      cachedName="regionCodeCorrected"
+                      lineageId="Package\Load MovieStatisticsFacts\Derived Column.Outputs[Derived Column Output].Columns[regionCodeCorrected]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">countryCode</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load MovieStatisticsFacts\Lookup geography.Outputs[Lookup Match Output]"
+                  errorOrTruncationOperation="Lookup"
+                  errorRowDisposition="FailComponent"
+                  exclusionGroup="1"
+                  name="Lookup Match Output"
+                  synchronousInputId="Package\Load MovieStatisticsFacts\Lookup geography.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load MovieStatisticsFacts\Lookup geography.Outputs[Lookup Match Output].Columns[geographyID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Copy Column"
+                      lineageId="Package\Load MovieStatisticsFacts\Lookup geography.Outputs[Lookup Match Output].Columns[geographyID]"
+                      name="geographyID"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">geographyID</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load MovieStatisticsFacts\Lookup geography.Outputs[Lookup No Match Output]"
+                  description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
+                  exclusionGroup="1"
+                  name="Lookup No Match Output"
+                  synchronousInputId="Package\Load MovieStatisticsFacts\Lookup geography.Inputs[Lookup Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load MovieStatisticsFacts\Lookup geography.Outputs[Lookup Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Lookup Error Output"
+                  synchronousInputId="Package\Load MovieStatisticsFacts\Lookup geography.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load MovieStatisticsFacts\Lookup geography.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load MovieStatisticsFacts\Lookup geography.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load MovieStatisticsFacts\Lookup geography.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load MovieStatisticsFacts\Lookup geography.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load MovieStatisticsFacts\Lookup releaseDateID"
+              componentClassID="Microsoft.Lookup"
+              contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
+              description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
+              name="Lookup releaseDateID"
+              usesDispositions="true"
+              version="6">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SQL statement that generates the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT [Date], DateID FROM DateDimension</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies a SQL statement that uses parameters to generate the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommandParam"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (SELECT [Date], DateID FROM DateDimension) [refTable]
+where [refTable].[Date] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the type of connection used to access the reference dataset."
+                  name="ConnectionType"
+                  typeConverter="LookupConnectionType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the cache type of the lookup table."
+                  name="CacheType"
+                  typeConverter="CacheType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
+                  name="NoMatchBehavior"
+                  typeConverter="LookupNoMatchBehavior">1</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
+                  name="NoMatchCachePercentage">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Maximum Memory Usage for Reference Cache on a 32 bit platform."
+                  name="MaxMemoryUsage">25</property>
+                <property
+                  dataType="System.Int64"
+                  description="Maximum Memory Usage for Reference Cache on a 64 bit platform."
+                  name="MaxMemoryUsage64">25</property>
+                <property
+                  dataType="System.String"
+                  description="Indicates whether to reference metadata in an XML format."
+                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="Date" dataType="DT_DBDATE" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="DateID" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                <property
+                  containsID="true"
+                  dataType="System.String"
+                  description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
+                  name="ParameterMap">#{Package\Load MovieStatisticsFacts\MoviesView.Outputs[OLE DB Source Output].Columns[releaseDate]};</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1250</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Determines whether duplicate keys in the reference data should be treated as errors when full cache mode is used."
+                  name="TreatDuplicateKeysAsError">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load MovieStatisticsFacts\Lookup releaseDateID.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[localhost.IMDB_dwh]"
+                  connectionManagerRefId="Package.ConnectionManagers[localhost.IMDB_dwh]"
+                  description="Connection manager used to access lookup data."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Load MovieStatisticsFacts\Lookup releaseDateID.Inputs[Lookup Input]"
+                  name="Lookup Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load MovieStatisticsFacts\Lookup releaseDateID.Inputs[Lookup Input].Columns[releaseDate]"
+                      cachedDataType="dbDate"
+                      cachedName="releaseDate"
+                      lineageId="Package\Load MovieStatisticsFacts\MoviesView.Outputs[OLE DB Source Output].Columns[releaseDate]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">Date</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load MovieStatisticsFacts\Lookup releaseDateID.Outputs[Lookup Match Output]"
+                  errorOrTruncationOperation="Lookup"
+                  exclusionGroup="1"
+                  name="Lookup Match Output"
+                  synchronousInputId="Package\Load MovieStatisticsFacts\Lookup releaseDateID.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load MovieStatisticsFacts\Lookup releaseDateID.Outputs[Lookup Match Output].Columns[releaseDateID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Copy Column"
+                      lineageId="Package\Load MovieStatisticsFacts\Lookup releaseDateID.Outputs[Lookup Match Output].Columns[releaseDateID]"
+                      name="releaseDateID"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">DateID</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load MovieStatisticsFacts\Lookup releaseDateID.Outputs[Lookup No Match Output]"
+                  description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
+                  exclusionGroup="1"
+                  name="Lookup No Match Output"
+                  synchronousInputId="Package\Load MovieStatisticsFacts\Lookup releaseDateID.Inputs[Lookup Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load MovieStatisticsFacts\Lookup releaseDateID.Outputs[Lookup Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Lookup Error Output"
+                  synchronousInputId="Package\Load MovieStatisticsFacts\Lookup releaseDateID.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load MovieStatisticsFacts\Lookup releaseDateID.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load MovieStatisticsFacts\Lookup releaseDateID.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load MovieStatisticsFacts\Lookup releaseDateID.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load MovieStatisticsFacts\Lookup releaseDateID.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load MovieStatisticsFacts\MoviesView"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="MoviesView"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[MoviesWithBudgetInfo]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">WITH MOVIE_BUDGET AS (
+	SELECT
+		*,
+		ROW_NUMBER() OVER (PARTITION BY movie, year(releaseDate) ORDER BY (SELECT NULL)) as num
+	FROM MovieBudget.dbo.MovieBudget
+),
+Movies AS (
+SELECT 
+	t.titleID, 	
+	t.titleType,
+	t.originalTitle, 
+	t.isAdult, 
+	mb.releaseDate,
+	t.runtimeMinutes, 
+	mb.productionBudget,
+	mb.domesticGross,
+	mb.worldwideGross, 
+	year(mb.releaseDate) AS releaseYear,
+	g.genreName,
+	ta.region,
+	tr.averageRating,
+	tr.numVotes,
+	Convert(date, getdate())  AS addedDate
+FROM MOVIE_BUDGET mb
+JOIN IMDB.dbo.Titles t ON 
+	t.originalTitle = mb.movie AND t.startYear=year(mb.releaseDate)
+OUTER APPLY (
+	SELECT TOP(1) 
+		g.genreName
+	FROM dbo.TitlesGenres tg
+		JOIN Genres g ON
+			g.genreID = tg.genreID
+	WHERE tg.titleID = t.titleID
+) g
+OUTER APPLY (
+	SELECT TOP(1)
+		ta.region
+	FROM dbo.TitlesAkas ta
+	WHERE ta.titleID = t.titleID AND ta.title=t.originalTitle
+) ta
+LEFT JOIN TitleRatings tr ON
+	tr.titleID = t.titleID
+WHERE t.titleType in ('movie', 'tvMovie') AND mb.num = 1)
+SELECT * from Movies where averageRating IS NOT NULL AND numVotes IS NOT NULL AND runtimeMinutes IS NOT NULL</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1250</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load MovieStatisticsFacts\MoviesView.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[localhost.IMDB]"
+                  connectionManagerRefId="Package.ConnectionManagers[localhost.IMDB]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Load MovieStatisticsFacts\MoviesView.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load MovieStatisticsFacts\MoviesView.Outputs[OLE DB Source Output].Columns[titleID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load MovieStatisticsFacts\MoviesView.Outputs[OLE DB Source Output].ExternalColumns[titleID]"
+                      lineageId="Package\Load MovieStatisticsFacts\MoviesView.Outputs[OLE DB Source Output].Columns[titleID]"
+                      name="titleID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load MovieStatisticsFacts\MoviesView.Outputs[OLE DB Source Output].Columns[productionBudget]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load MovieStatisticsFacts\MoviesView.Outputs[OLE DB Source Output].ExternalColumns[productionBudget]"
+                      lineageId="Package\Load MovieStatisticsFacts\MoviesView.Outputs[OLE DB Source Output].Columns[productionBudget]"
+                      name="productionBudget"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load MovieStatisticsFacts\MoviesView.Outputs[OLE DB Source Output].Columns[domesticGross]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load MovieStatisticsFacts\MoviesView.Outputs[OLE DB Source Output].ExternalColumns[domesticGross]"
+                      lineageId="Package\Load MovieStatisticsFacts\MoviesView.Outputs[OLE DB Source Output].Columns[domesticGross]"
+                      name="domesticGross"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load MovieStatisticsFacts\MoviesView.Outputs[OLE DB Source Output].Columns[worldwideGross]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load MovieStatisticsFacts\MoviesView.Outputs[OLE DB Source Output].ExternalColumns[worldwideGross]"
+                      lineageId="Package\Load MovieStatisticsFacts\MoviesView.Outputs[OLE DB Source Output].Columns[worldwideGross]"
+                      name="worldwideGross"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load MovieStatisticsFacts\MoviesView.Outputs[OLE DB Source Output].Columns[regionCode]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load MovieStatisticsFacts\MoviesView.Outputs[OLE DB Source Output].ExternalColumns[region]"
+                      length="4"
+                      lineageId="Package\Load MovieStatisticsFacts\MoviesView.Outputs[OLE DB Source Output].Columns[regionCode]"
+                      name="regionCode"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load MovieStatisticsFacts\MoviesView.Outputs[OLE DB Source Output].Columns[runtimeMinutes]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load MovieStatisticsFacts\MoviesView.Outputs[OLE DB Source Output].ExternalColumns[runtimeMinutes]"
+                      lineageId="Package\Load MovieStatisticsFacts\MoviesView.Outputs[OLE DB Source Output].Columns[runtimeMinutes]"
+                      name="runtimeMinutes"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load MovieStatisticsFacts\MoviesView.Outputs[OLE DB Source Output].Columns[titleType]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load MovieStatisticsFacts\MoviesView.Outputs[OLE DB Source Output].ExternalColumns[titleType]"
+                      length="12"
+                      lineageId="Package\Load MovieStatisticsFacts\MoviesView.Outputs[OLE DB Source Output].Columns[titleType]"
+                      name="titleType"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load MovieStatisticsFacts\MoviesView.Outputs[OLE DB Source Output].Columns[originalTitle]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load MovieStatisticsFacts\MoviesView.Outputs[OLE DB Source Output].ExternalColumns[originalTitle]"
+                      length="450"
+                      lineageId="Package\Load MovieStatisticsFacts\MoviesView.Outputs[OLE DB Source Output].Columns[originalTitle]"
+                      name="originalTitle"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load MovieStatisticsFacts\MoviesView.Outputs[OLE DB Source Output].Columns[isAdult]"
+                      dataType="bool"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load MovieStatisticsFacts\MoviesView.Outputs[OLE DB Source Output].ExternalColumns[isAdult]"
+                      lineageId="Package\Load MovieStatisticsFacts\MoviesView.Outputs[OLE DB Source Output].Columns[isAdult]"
+                      name="isAdult"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load MovieStatisticsFacts\MoviesView.Outputs[OLE DB Source Output].Columns[genre]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load MovieStatisticsFacts\MoviesView.Outputs[OLE DB Source Output].ExternalColumns[genreName]"
+                      length="50"
+                      lineageId="Package\Load MovieStatisticsFacts\MoviesView.Outputs[OLE DB Source Output].Columns[genre]"
+                      name="genre"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load MovieStatisticsFacts\MoviesView.Outputs[OLE DB Source Output].Columns[addedDate]"
+                      dataType="dbDate"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load MovieStatisticsFacts\MoviesView.Outputs[OLE DB Source Output].ExternalColumns[addedDate]"
+                      lineageId="Package\Load MovieStatisticsFacts\MoviesView.Outputs[OLE DB Source Output].Columns[addedDate]"
+                      name="addedDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load MovieStatisticsFacts\MoviesView.Outputs[OLE DB Source Output].Columns[averageRating]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load MovieStatisticsFacts\MoviesView.Outputs[OLE DB Source Output].ExternalColumns[averageRating]"
+                      lineageId="Package\Load MovieStatisticsFacts\MoviesView.Outputs[OLE DB Source Output].Columns[averageRating]"
+                      name="averageRating"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load MovieStatisticsFacts\MoviesView.Outputs[OLE DB Source Output].Columns[numVotes]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load MovieStatisticsFacts\MoviesView.Outputs[OLE DB Source Output].ExternalColumns[numVotes]"
+                      lineageId="Package\Load MovieStatisticsFacts\MoviesView.Outputs[OLE DB Source Output].Columns[numVotes]"
+                      name="numVotes"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load MovieStatisticsFacts\MoviesView.Outputs[OLE DB Source Output].Columns[releaseDate]"
+                      dataType="dbDate"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load MovieStatisticsFacts\MoviesView.Outputs[OLE DB Source Output].ExternalColumns[releaseDate]"
+                      lineageId="Package\Load MovieStatisticsFacts\MoviesView.Outputs[OLE DB Source Output].Columns[releaseDate]"
+                      name="releaseDate"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Load MovieStatisticsFacts\MoviesView.Outputs[OLE DB Source Output].ExternalColumns[titleID]"
+                      dataType="i4"
+                      name="titleID" />
+                    <externalMetadataColumn
+                      refId="Package\Load MovieStatisticsFacts\MoviesView.Outputs[OLE DB Source Output].ExternalColumns[productionBudget]"
+                      dataType="cy"
+                      name="productionBudget" />
+                    <externalMetadataColumn
+                      refId="Package\Load MovieStatisticsFacts\MoviesView.Outputs[OLE DB Source Output].ExternalColumns[domesticGross]"
+                      dataType="cy"
+                      name="domesticGross" />
+                    <externalMetadataColumn
+                      refId="Package\Load MovieStatisticsFacts\MoviesView.Outputs[OLE DB Source Output].ExternalColumns[worldwideGross]"
+                      dataType="cy"
+                      name="worldwideGross" />
+                    <externalMetadataColumn
+                      refId="Package\Load MovieStatisticsFacts\MoviesView.Outputs[OLE DB Source Output].ExternalColumns[region]"
+                      dataType="wstr"
+                      length="4"
+                      name="region" />
+                    <externalMetadataColumn
+                      refId="Package\Load MovieStatisticsFacts\MoviesView.Outputs[OLE DB Source Output].ExternalColumns[runtimeMinutes]"
+                      dataType="i4"
+                      name="runtimeMinutes" />
+                    <externalMetadataColumn
+                      refId="Package\Load MovieStatisticsFacts\MoviesView.Outputs[OLE DB Source Output].ExternalColumns[titleType]"
+                      dataType="wstr"
+                      length="12"
+                      name="titleType" />
+                    <externalMetadataColumn
+                      refId="Package\Load MovieStatisticsFacts\MoviesView.Outputs[OLE DB Source Output].ExternalColumns[originalTitle]"
+                      dataType="wstr"
+                      length="450"
+                      name="originalTitle" />
+                    <externalMetadataColumn
+                      refId="Package\Load MovieStatisticsFacts\MoviesView.Outputs[OLE DB Source Output].ExternalColumns[isAdult]"
+                      dataType="bool"
+                      name="isAdult" />
+                    <externalMetadataColumn
+                      refId="Package\Load MovieStatisticsFacts\MoviesView.Outputs[OLE DB Source Output].ExternalColumns[genreName]"
+                      dataType="wstr"
+                      length="50"
+                      name="genreName" />
+                    <externalMetadataColumn
+                      refId="Package\Load MovieStatisticsFacts\MoviesView.Outputs[OLE DB Source Output].ExternalColumns[addedDate]"
+                      dataType="dbDate"
+                      name="addedDate" />
+                    <externalMetadataColumn
+                      refId="Package\Load MovieStatisticsFacts\MoviesView.Outputs[OLE DB Source Output].ExternalColumns[averageRating]"
+                      dataType="r8"
+                      name="averageRating" />
+                    <externalMetadataColumn
+                      refId="Package\Load MovieStatisticsFacts\MoviesView.Outputs[OLE DB Source Output].ExternalColumns[numVotes]"
+                      dataType="i4"
+                      name="numVotes" />
+                    <externalMetadataColumn
+                      refId="Package\Load MovieStatisticsFacts\MoviesView.Outputs[OLE DB Source Output].ExternalColumns[releaseYear]"
+                      dataType="i4"
+                      name="releaseYear" />
+                    <externalMetadataColumn
+                      refId="Package\Load MovieStatisticsFacts\MoviesView.Outputs[OLE DB Source Output].ExternalColumns[releaseDate]"
+                      dataType="dbDate"
+                      name="releaseDate" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Load MovieStatisticsFacts\MoviesView.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load MovieStatisticsFacts\MoviesView.Outputs[OLE DB Source Error Output].Columns[titleID]"
+                      dataType="i4"
+                      lineageId="Package\Load MovieStatisticsFacts\MoviesView.Outputs[OLE DB Source Error Output].Columns[titleID]"
+                      name="titleID" />
+                    <outputColumn
+                      refId="Package\Load MovieStatisticsFacts\MoviesView.Outputs[OLE DB Source Error Output].Columns[titleType]"
+                      dataType="wstr"
+                      length="12"
+                      lineageId="Package\Load MovieStatisticsFacts\MoviesView.Outputs[OLE DB Source Error Output].Columns[titleType]"
+                      name="titleType" />
+                    <outputColumn
+                      refId="Package\Load MovieStatisticsFacts\MoviesView.Outputs[OLE DB Source Error Output].Columns[originalTitle]"
+                      dataType="wstr"
+                      length="450"
+                      lineageId="Package\Load MovieStatisticsFacts\MoviesView.Outputs[OLE DB Source Error Output].Columns[originalTitle]"
+                      name="originalTitle" />
+                    <outputColumn
+                      refId="Package\Load MovieStatisticsFacts\MoviesView.Outputs[OLE DB Source Error Output].Columns[isAdult]"
+                      dataType="bool"
+                      lineageId="Package\Load MovieStatisticsFacts\MoviesView.Outputs[OLE DB Source Error Output].Columns[isAdult]"
+                      name="isAdult" />
+                    <outputColumn
+                      refId="Package\Load MovieStatisticsFacts\MoviesView.Outputs[OLE DB Source Error Output].Columns[releaseDate]"
+                      dataType="dbDate"
+                      lineageId="Package\Load MovieStatisticsFacts\MoviesView.Outputs[OLE DB Source Error Output].Columns[releaseDate]"
+                      name="releaseDate" />
+                    <outputColumn
+                      refId="Package\Load MovieStatisticsFacts\MoviesView.Outputs[OLE DB Source Error Output].Columns[productionBudget]"
+                      dataType="cy"
+                      lineageId="Package\Load MovieStatisticsFacts\MoviesView.Outputs[OLE DB Source Error Output].Columns[productionBudget]"
+                      name="productionBudget" />
+                    <outputColumn
+                      refId="Package\Load MovieStatisticsFacts\MoviesView.Outputs[OLE DB Source Error Output].Columns[domesticGross]"
+                      dataType="cy"
+                      lineageId="Package\Load MovieStatisticsFacts\MoviesView.Outputs[OLE DB Source Error Output].Columns[domesticGross]"
+                      name="domesticGross" />
+                    <outputColumn
+                      refId="Package\Load MovieStatisticsFacts\MoviesView.Outputs[OLE DB Source Error Output].Columns[worldwideGross]"
+                      dataType="cy"
+                      lineageId="Package\Load MovieStatisticsFacts\MoviesView.Outputs[OLE DB Source Error Output].Columns[worldwideGross]"
+                      name="worldwideGross" />
+                    <outputColumn
+                      refId="Package\Load MovieStatisticsFacts\MoviesView.Outputs[OLE DB Source Error Output].Columns[runtimeMinutes]"
+                      dataType="i4"
+                      lineageId="Package\Load MovieStatisticsFacts\MoviesView.Outputs[OLE DB Source Error Output].Columns[runtimeMinutes]"
+                      name="runtimeMinutes" />
+                    <outputColumn
+                      refId="Package\Load MovieStatisticsFacts\MoviesView.Outputs[OLE DB Source Error Output].Columns[genreName]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Load MovieStatisticsFacts\MoviesView.Outputs[OLE DB Source Error Output].Columns[genreName]"
+                      name="genreName" />
+                    <outputColumn
+                      refId="Package\Load MovieStatisticsFacts\MoviesView.Outputs[OLE DB Source Error Output].Columns[region]"
+                      dataType="wstr"
+                      length="4"
+                      lineageId="Package\Load MovieStatisticsFacts\MoviesView.Outputs[OLE DB Source Error Output].Columns[region]"
+                      name="region" />
+                    <outputColumn
+                      refId="Package\Load MovieStatisticsFacts\MoviesView.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load MovieStatisticsFacts\MoviesView.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load MovieStatisticsFacts\MoviesView.Outputs[OLE DB Source Error Output].Columns[averageRating]"
+                      dataType="r8"
+                      lineageId="Package\Load MovieStatisticsFacts\MoviesView.Outputs[OLE DB Source Error Output].Columns[averageRating]"
+                      name="averageRating" />
+                    <outputColumn
+                      refId="Package\Load MovieStatisticsFacts\MoviesView.Outputs[OLE DB Source Error Output].Columns[numVotes]"
+                      dataType="i4"
+                      lineageId="Package\Load MovieStatisticsFacts\MoviesView.Outputs[OLE DB Source Error Output].Columns[numVotes]"
+                      name="numVotes" />
+                    <outputColumn
+                      refId="Package\Load MovieStatisticsFacts\MoviesView.Outputs[OLE DB Source Error Output].Columns[addedDate]"
+                      dataType="dbDate"
+                      lineageId="Package\Load MovieStatisticsFacts\MoviesView.Outputs[OLE DB Source Error Output].Columns[addedDate]"
+                      name="addedDate" />
+                    <outputColumn
+                      refId="Package\Load MovieStatisticsFacts\MoviesView.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load MovieStatisticsFacts\MoviesView.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load MovieStatisticsFacts\OLE DB Destination"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="OLE DB Destination"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[MovieStatisticsFacts]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1250</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load MovieStatisticsFacts\OLE DB Destination.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[localhost.IMDB_dwh]"
+                  connectionManagerRefId="Package.ConnectionManagers[localhost.IMDB_dwh]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Load MovieStatisticsFacts\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load MovieStatisticsFacts\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[productionBudget]"
+                      cachedDataType="cy"
+                      cachedName="productionBudget"
+                      externalMetadataColumnId="Package\Load MovieStatisticsFacts\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[productionBudget]"
+                      lineageId="Package\Load MovieStatisticsFacts\MoviesView.Outputs[OLE DB Source Output].Columns[productionBudget]" />
+                    <inputColumn
+                      refId="Package\Load MovieStatisticsFacts\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[domesticGross]"
+                      cachedDataType="cy"
+                      cachedName="domesticGross"
+                      externalMetadataColumnId="Package\Load MovieStatisticsFacts\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[domesticGross]"
+                      lineageId="Package\Load MovieStatisticsFacts\MoviesView.Outputs[OLE DB Source Output].Columns[domesticGross]" />
+                    <inputColumn
+                      refId="Package\Load MovieStatisticsFacts\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[worldwideGross]"
+                      cachedDataType="cy"
+                      cachedName="worldwideGross"
+                      externalMetadataColumnId="Package\Load MovieStatisticsFacts\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[worldwideGross]"
+                      lineageId="Package\Load MovieStatisticsFacts\MoviesView.Outputs[OLE DB Source Output].Columns[worldwideGross]" />
+                    <inputColumn
+                      refId="Package\Load MovieStatisticsFacts\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[averageRating]"
+                      cachedDataType="r8"
+                      cachedName="averageRating"
+                      externalMetadataColumnId="Package\Load MovieStatisticsFacts\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[averageRating]"
+                      lineageId="Package\Load MovieStatisticsFacts\MoviesView.Outputs[OLE DB Source Output].Columns[averageRating]" />
+                    <inputColumn
+                      refId="Package\Load MovieStatisticsFacts\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[numVotes]"
+                      cachedDataType="i4"
+                      cachedName="numVotes"
+                      externalMetadataColumnId="Package\Load MovieStatisticsFacts\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[numVotes]"
+                      lineageId="Package\Load MovieStatisticsFacts\MoviesView.Outputs[OLE DB Source Output].Columns[numVotes]" />
+                    <inputColumn
+                      refId="Package\Load MovieStatisticsFacts\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[primaryGenreID]"
+                      cachedDataType="i4"
+                      cachedName="primaryGenreID"
+                      externalMetadataColumnId="Package\Load MovieStatisticsFacts\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[primaryGenreID]"
+                      lineageId="Package\Load MovieStatisticsFacts\Lookup genre.Outputs[Lookup Match Output].Columns[primaryGenreID]" />
+                    <inputColumn
+                      refId="Package\Load MovieStatisticsFacts\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[titleID]"
+                      cachedDataType="i4"
+                      cachedName="titleID"
+                      externalMetadataColumnId="Package\Load MovieStatisticsFacts\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[titleID]"
+                      lineageId="Package\Load MovieStatisticsFacts\MoviesView.Outputs[OLE DB Source Output].Columns[titleID]" />
+                    <inputColumn
+                      refId="Package\Load MovieStatisticsFacts\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[geographyID]"
+                      cachedDataType="i4"
+                      cachedName="geographyID"
+                      externalMetadataColumnId="Package\Load MovieStatisticsFacts\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[geographyID]"
+                      lineageId="Package\Load MovieStatisticsFacts\Lookup geography.Outputs[Lookup Match Output].Columns[geographyID]" />
+                    <inputColumn
+                      refId="Package\Load MovieStatisticsFacts\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[addedDateID]"
+                      cachedDataType="i4"
+                      cachedName="addedDateID"
+                      externalMetadataColumnId="Package\Load MovieStatisticsFacts\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[addedDateID]"
+                      lineageId="Package\Load MovieStatisticsFacts\Lookup addedDate.Outputs[Lookup Match Output].Columns[addedDateID]" />
+                    <inputColumn
+                      refId="Package\Load MovieStatisticsFacts\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[runtimeMinutes]"
+                      cachedDataType="i4"
+                      cachedName="runtimeMinutes"
+                      externalMetadataColumnId="Package\Load MovieStatisticsFacts\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[runtimeMinutes]"
+                      lineageId="Package\Load MovieStatisticsFacts\MoviesView.Outputs[OLE DB Source Output].Columns[runtimeMinutes]" />
+                    <inputColumn
+                      refId="Package\Load MovieStatisticsFacts\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[releaseDateID]"
+                      cachedDataType="i4"
+                      cachedName="releaseDateID"
+                      externalMetadataColumnId="Package\Load MovieStatisticsFacts\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[releaseDateID]"
+                      lineageId="Package\Load MovieStatisticsFacts\Lookup releaseDateID.Outputs[Lookup Match Output].Columns[releaseDateID]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Load MovieStatisticsFacts\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[titleID]"
+                      dataType="i4"
+                      name="titleID" />
+                    <externalMetadataColumn
+                      refId="Package\Load MovieStatisticsFacts\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[primaryGenreID]"
+                      dataType="i4"
+                      name="primaryGenreID" />
+                    <externalMetadataColumn
+                      refId="Package\Load MovieStatisticsFacts\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[geographyID]"
+                      dataType="i4"
+                      name="geographyID" />
+                    <externalMetadataColumn
+                      refId="Package\Load MovieStatisticsFacts\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[runtimeMinutes]"
+                      dataType="i4"
+                      name="runtimeMinutes" />
+                    <externalMetadataColumn
+                      refId="Package\Load MovieStatisticsFacts\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[productionBudget]"
+                      dataType="cy"
+                      name="productionBudget" />
+                    <externalMetadataColumn
+                      refId="Package\Load MovieStatisticsFacts\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[domesticGross]"
+                      dataType="cy"
+                      name="domesticGross" />
+                    <externalMetadataColumn
+                      refId="Package\Load MovieStatisticsFacts\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[worldwideGross]"
+                      dataType="cy"
+                      name="worldwideGross" />
+                    <externalMetadataColumn
+                      refId="Package\Load MovieStatisticsFacts\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[averageRating]"
+                      dataType="r8"
+                      name="averageRating" />
+                    <externalMetadataColumn
+                      refId="Package\Load MovieStatisticsFacts\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[numVotes]"
+                      dataType="i4"
+                      name="numVotes" />
+                    <externalMetadataColumn
+                      refId="Package\Load MovieStatisticsFacts\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[addedDateID]"
+                      dataType="i4"
+                      name="addedDateID" />
+                    <externalMetadataColumn
+                      refId="Package\Load MovieStatisticsFacts\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[releaseDateID]"
+                      dataType="i4"
+                      name="releaseDateID" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load MovieStatisticsFacts\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Load MovieStatisticsFacts\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load MovieStatisticsFacts\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load MovieStatisticsFacts\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load MovieStatisticsFacts\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load MovieStatisticsFacts\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Load MovieStatisticsFacts.Paths[Derived Column Output]"
+              endId="Package\Load MovieStatisticsFacts\Lookup genre.Inputs[Lookup Input]"
+              name="Derived Column Output"
+              startId="Package\Load MovieStatisticsFacts\Derived Column.Outputs[Derived Column Output]" />
+            <path
+              refId="Package\Load MovieStatisticsFacts.Paths[Lookup Match Output]"
+              endId="Package\Load MovieStatisticsFacts\Lookup addedDate.Inputs[Lookup Input]"
+              name="Lookup Match Output"
+              startId="Package\Load MovieStatisticsFacts\Lookup geography.Outputs[Lookup Match Output]" />
+            <path
+              refId="Package\Load MovieStatisticsFacts.Paths[Lookup Match Output1]"
+              endId="Package\Load MovieStatisticsFacts\Lookup geography.Inputs[Lookup Input]"
+              name="Lookup Match Output"
+              startId="Package\Load MovieStatisticsFacts\Lookup genre.Outputs[Lookup Match Output]" />
+            <path
+              refId="Package\Load MovieStatisticsFacts.Paths[Lookup Match Output2]"
+              endId="Package\Load MovieStatisticsFacts\Lookup releaseDateID.Inputs[Lookup Input]"
+              name="Lookup Match Output"
+              startId="Package\Load MovieStatisticsFacts\Lookup addedDate.Outputs[Lookup Match Output]" />
+            <path
+              refId="Package\Load MovieStatisticsFacts.Paths[Lookup Match Output3]"
+              endId="Package\Load MovieStatisticsFacts\OLE DB Destination.Inputs[OLE DB Destination Input]"
+              name="Lookup Match Output"
+              startId="Package\Load MovieStatisticsFacts\Lookup releaseDateID.Outputs[Lookup Match Output]" />
+            <path
+              refId="Package\Load MovieStatisticsFacts.Paths[OLE DB Source Output]"
+              endId="Package\Load MovieStatisticsFacts\Derived Column.Inputs[Derived Column Input]"
+              name="OLE DB Source Output"
+              startId="Package\Load MovieStatisticsFacts\MoviesView.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Truncate CommitmentsFactsStaging"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{D26C9787-EA04-4F19-90E9-3A39AE7114EF}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Truncate CommitmentsFactsStaging"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2019; © 2019 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{1E697280-59F9-4721-BA71-EF3E859BD30E}"
+          SQLTask:SqlStatementSource="TRUNCATE TABLE CommitmentFactsStaging" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{28759033-2C2B-4746-BF72-8F881A562AEC}"
+      DTS:From="Package\Truncate CommitmentsFactsStaging"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Load CommitmentFactsStaging" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{05DB3878-911D-4352-BD67-82835E2E78A4}"
+      DTS:From="Package\Load CommitmentFactsStaging"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Load CommitmentFacts" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="190,42"
+          Id="Package\Load CommitmentFacts"
+          TopLeft="297,215" />
+        <NodeLayout
+          Size="225,42"
+          Id="Package\Load CommitmentFactsStaging"
+          TopLeft="311,126" />
+        <NodeLayout
+          Size="198,42"
+          Id="Package\Load MovieStatisticsFacts"
+          TopLeft="664,66" />
+        <NodeLayout
+          Size="249,42"
+          Id="Package\Truncate CommitmentsFactsStaging"
+          TopLeft="278,40" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="402.5,82">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="21,44"
+              Start="0,0"
+              End="21,36.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,18" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,18"
+                    Point2="0,22"
+                    Point3="4,22" />
+                  <mssgle:LineSegment
+                    End="17,22" />
+                  <mssgle:CubicBezierSegment
+                    Point1="17,22"
+                    Point2="21,22"
+                    Point3="21,26" />
+                  <mssgle:LineSegment
+                    End="21,36.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="423.5,168">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-31.5,47"
+              Start="0,0"
+              End="-31.5,39.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,19.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,19.5"
+                    Point2="0,23.5"
+                    Point3="-4,23.5" />
+                  <mssgle:LineSegment
+                    End="-27.5,23.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-27.5,23.5"
+                    Point2="-31.5,23.5"
+                    Point3="-31.5,27.5" />
+                  <mssgle:LineSegment
+                    End="-31.5,39.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Load CommitmentFacts">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="171,42"
+          Id="Package\Load CommitmentFacts\OLE DB Destination"
+          TopLeft="212,431" />
+        <NodeLayout
+          Size="150,42"
+          Id="Package\Load CommitmentFacts\OLE DB Source"
+          TopLeft="222,265" />
+        <EdgeLayout
+          Id="Package\Load CommitmentFacts.Paths[OLE DB Source Output]"
+          TopLeft="297.25,307">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,124"
+              Start="0,0"
+              End="0,116.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,116.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load CommitmentFacts\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load CommitmentFacts\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Load CommitmentFactsStaging">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="150,42"
+          Id="Package\Load CommitmentFactsStaging\OLE DB Source"
+          TopLeft="219,124" />
+        <NodeLayout
+          Size="172,42"
+          Id="Package\Load CommitmentFactsStaging\Lookup personSKID"
+          TopLeft="217,354" />
+        <NodeLayout
+          Size="208,42"
+          Id="Package\Load CommitmentFactsStaging\Check if in MovieDimension"
+          TopLeft="197,238" />
+        <NodeLayout
+          Size="207,42"
+          Id="Package\Load CommitmentFactsStaging\OLE DB Destination"
+          TopLeft="196,459" />
+        <EdgeLayout
+          Id="Package\Load CommitmentFactsStaging.Paths[OLE DB Source Output]"
+          TopLeft="297.5,166">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,72"
+              Start="0,0"
+              End="0,64.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,64.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load CommitmentFactsStaging.Paths[Lookup Match Output1]"
+          TopLeft="301.25,396">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,63"
+              Start="0,0"
+              End="0,55.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,55.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-48.19138671875,21.9453125,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load CommitmentFactsStaging.Paths[Lookup Match Output]"
+          TopLeft="302,280">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,74"
+              Start="0,0"
+              End="0,66.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,66.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-48.19138671875,27.4453125,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load CommitmentFactsStaging\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load CommitmentFactsStaging\Lookup personSKID">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:string">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string"></Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:string">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load CommitmentFactsStaging\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Load MovieStatisticsFacts">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="167,42"
+          Id="Package\Load MovieStatisticsFacts\Lookup addedDate"
+          TopLeft="548,568" />
+        <NodeLayout
+          Size="166,42"
+          Id="Package\Load MovieStatisticsFacts\Lookup geography"
+          TopLeft="542,436" />
+        <NodeLayout
+          Size="171,42"
+          Id="Package\Load MovieStatisticsFacts\OLE DB Destination"
+          TopLeft="548,744" />
+        <NodeLayout
+          Size="143,42"
+          Id="Package\Load MovieStatisticsFacts\Lookup genre"
+          TopLeft="558,293" />
+        <NodeLayout
+          Size="147,46"
+          Id="Package\Load MovieStatisticsFacts\MoviesView"
+          TopLeft="556,95" />
+        <NodeLayout
+          Size="154,42"
+          Id="Package\Load MovieStatisticsFacts\Derived Column"
+          TopLeft="554,209" />
+        <EdgeLayout
+          Id="Package\Load MovieStatisticsFacts.Paths[OLE DB Source Output]"
+          TopLeft="630.25,141">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,68"
+              Start="0,0"
+              End="0,60.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,60.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load MovieStatisticsFacts.Paths[Lookup Match Output1]"
+          TopLeft="627.25,335">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,101"
+              Start="0,0"
+              End="0,93.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,93.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-48.19138671875,40.9453125,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load MovieStatisticsFacts.Paths[Lookup Match Output]"
+          TopLeft="628.25,478">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,90"
+              Start="0,0"
+              End="0,82.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,82.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-48.19138671875,35.4453125,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load MovieStatisticsFacts.Paths[Derived Column Output]"
+          TopLeft="630.25,251">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,42"
+              Start="0,0"
+              End="0,34.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,34.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="183,42"
+          Id="Package\Load MovieStatisticsFacts\Lookup releaseDateID"
+          TopLeft="537,647" />
+        <EdgeLayout
+          Id="Package\Load MovieStatisticsFacts.Paths[Lookup Match Output2]"
+          TopLeft="630,610">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,37"
+              Start="0,0"
+              End="0,29.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,29.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-48.19138671875,8.9453125,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load MovieStatisticsFacts.Paths[Lookup Match Output3]"
+          TopLeft="631,689">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,55"
+              Start="0,0"
+              End="0,47.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,47.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-48.19138671875,17.9453125,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load MovieStatisticsFacts\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load MovieStatisticsFacts\MoviesView">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load MovieStatisticsFacts\Lookup releaseDateID">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:boolean">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string"></Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:int">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
